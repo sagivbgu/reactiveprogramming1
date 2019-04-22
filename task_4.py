@@ -5,7 +5,8 @@ DEFAULT_BOOK = r"recipes/small-db.json"
 
 def search(keywords=(), ingredients_to_include=(), ingredients_to_exclude=(), recipes_file_path=DEFAULT_BOOK):
     def keywords_filter(recipe):
-        return all(keyword in recipe["description"] for keyword in keywords)
+        return all(any(keyword in recipe[field] for field in recipe)
+                   for keyword in keywords)
 
     def include_filter(recipe):
         return all(ingredient in recipe["ingredients"] for ingredient in ingredients_to_include)
@@ -21,7 +22,8 @@ def search(keywords=(), ingredients_to_include=(), ingredients_to_exclude=(), re
 
 
 def statistics(function, properties, data):
-    raise NotImplementedError
+    properties_values = (int(recipe[properties]) for recipe in data if properties in recipe)
+    return function(properties_values)
 
 
 def _deserialize_recipes_json(file_path):
