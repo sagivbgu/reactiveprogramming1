@@ -1,0 +1,30 @@
+import json
+
+DEFAULT_BOOK = r"recipes/small-db.json"
+
+
+def search(keywords=(), ingredients_to_include=(), ingredients_to_exclude=(), recipes_file_path=DEFAULT_BOOK):
+    def keywords_filter(recipe):
+        return all(keyword in recipe["description"] for keyword in keywords)
+
+    def include_filter(recipe):
+        return all(ingredient in recipe["ingredients"] for ingredient in ingredients_to_include)
+
+    def exclude_filter(recipe):
+        return not any(ingredient in recipe["ingredients"] for ingredient in ingredients_to_exclude)
+
+    def all_filters(recipe):
+        return all(f(recipe) for f in (keywords_filter, include_filter, exclude_filter))
+
+    recipes = _deserialize_recipes_json(recipes_file_path)
+    return filter(all_filters, recipes)
+
+
+def statistics(function, properties, data):
+    raise NotImplementedError
+
+
+def _deserialize_recipes_json(file_path):
+    with open(file_path, "r", encoding="utf-8") as recipes_book:
+        for line in recipes_book:
+            yield json.loads(line)
