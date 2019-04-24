@@ -29,3 +29,12 @@ def test_decrypt_vigenere_cipher():
     assert decrypt_vigenere_cipher("LXFOPVEFRNHR", "LEMON") == "ATTACKATDAWN"
     assert decrypt_vigenere_cipher("LX", "LEMON") == "AT"
     assert decrypt_vigenere_cipher("LXF4PVEFR9HR", "LEMON") == "ATT4CKATD9WN"
+
+
+def test_morse_code():
+    text = "AIES53 EHTN0"
+    morse = ".-{0}..{0}.{0}...{0}.....{0}...--{1}.{0}....{0}-{0}-.{0}-----".format(MORSE_LETTER_DELIMITER,
+                                                                                   MORSE_WORD_DELIMITER)
+
+    assert encrypt_morse_code(text) == morse
+    assert decrypt_morse_code(morse) == text
