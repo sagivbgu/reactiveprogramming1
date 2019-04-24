@@ -11,6 +11,7 @@ TEXT_TO_MORSE = {"A": ".-", "B": "-...", "C": "-.-.", "D": "-..", "E": ".", "F":
 MORSE_LETTER_DELIMITER = " "
 MORSE_WORD_DELIMITER = "  "
 
+
 def encrypt_caesar_cipher(plaintext):
     return _caesar_cipher(plaintext, CAESAR_CIPHER_SHIFT)
 
