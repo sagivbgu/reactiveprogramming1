@@ -56,9 +56,12 @@ def p_7_fo(inputlist):
 
 def p_8_lc(inputlist):
     return inputlist[::2]  # TODO: Ask Majeed since it's not a list comprehension
+                           # CR: I'd change it to a regular list comprehension
 
 
 # TODO: Is there a smarter way?
 def p_8_fo(inputlist):
+                                 # CR: Maybe change the lambda to - lambda i, x: i % 2 == 0?
     enumerable_at_even_indexes = filter(lambda x: x[0] % 2 == 0, enumerate(inputlist))
+                    # CR: Same here - lambda i, x: x
     return list(map(lambda x: x[1], enumerable_at_even_indexes))
