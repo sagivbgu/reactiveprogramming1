@@ -23,10 +23,12 @@ def test_p_3():
 
 def test_p_4_lc():
     assert p_4_lc(["apple", "orange", "pear"]) == ["A", "O", "P"]
+    assert p_4_lc(["apple", "", "pear"]) == ["A", "", "P"]
 
 
 def test_p_4_fo():
     assert p_4_fo(["apple", "orange", "pear"]) == ["A", "O", "P"]
+    assert p_4_fo(["apple", "", "pear"]) == ["A", "", "P"]
 
 
 def test_p_5():

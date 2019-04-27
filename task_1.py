@@ -23,11 +23,11 @@ def p_3_fo(inputlist):
 
 
 def p_4_lc(inputlist):
-    return [x[0].upper() for x in inputlist]
+    return [x[0].upper() if x else "" for x in inputlist]
 
 
 def p_4_fo(inputlist):
-    return list(map(lambda x: x[0].upper(), inputlist))
+    return list(map(lambda x: x[0].upper() if x else "", inputlist))
 
 
 def p_5_lc(inputlist):
@@ -59,9 +59,6 @@ def p_8_lc(inputlist):
                            # CR: I'd change it to a regular list comprehension
 
 
-# TODO: Is there a smarter way?
 def p_8_fo(inputlist):
-                                 # CR: Maybe change the lambda to - lambda i, x: i % 2 == 0?
-    enumerable_at_even_indexes = filter(lambda x: x[0] % 2 == 0, enumerate(inputlist))
-                    # CR: Same here - lambda i, x: x
-    return list(map(lambda x: x[1], enumerable_at_even_indexes))
+    even_indexes = filter(lambda i: i % 2 == 0, range(len(inputlist)))
+    return list(map(lambda i: inputlist[i], even_indexes))
