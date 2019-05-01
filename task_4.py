@@ -26,9 +26,16 @@ def statistics(aggregate_function, data, property=None):
 
 
 def _parse_args(*args):
-    ingredients_to_include = {arg for arg in args if arg.startswith("+")}
-    ingredients_to_exclude = {arg for arg in args if arg.startswith("-")}
-    keywords = set(args) - ingredients_to_include - ingredients_to_exclude
+    def include_filter(arg):
+        return arg.startswith("+")
+
+    def exclude_filter(arg):
+        return arg.startswith("-")
+
+    keywords = (arg for arg in args if not include_filter(arg) and not exclude_filter(arg))
+    ingredients_to_include = (arg[1:] for arg in args if include_filter(arg))
+    ingredients_to_exclude = (arg[1:] for arg in args if exclude_filter(arg))
+
     return keywords, ingredients_to_include, ingredients_to_exclude
 
 
