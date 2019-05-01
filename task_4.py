@@ -7,8 +7,10 @@ def search(file_name, *args):
     def keywords_filter(recipe):
         def is_keyword_in_field(keyword, field):
             if isinstance(field, dict):
+                # We want to "flatten" the dict and search in each value
                 field = list(field.values())
             if isinstance(field, list) and field:
+                # Recursive search
                 return any(is_keyword_in_field(keyword, subfield) for subfield in field)
             return keyword in str(field)
 
