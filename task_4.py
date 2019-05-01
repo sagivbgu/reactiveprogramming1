@@ -5,7 +5,12 @@ def search(file_name, *args):
     keywords, ingredients_to_include, ingredients_to_exclude = _parse_args(args)
 
     def keywords_filter(recipe):
-        return all(any(keyword in recipe[field] for field in recipe)
+        def is_keyword_in_field(keyword, field):
+            if isinstance(field, (list, dict)) and field:
+                return any(is_keyword_in_field(keyword, subfield) for subfield in field)
+            return keyword in field
+
+        return all(any(is_keyword_in_field(keyword, recipe[field]) for field in recipe)
                    for keyword in keywords)
 
     def include_filter(recipe):
@@ -27,15 +32,15 @@ def statistics(aggregate_function, data, property=None):
 
 
 def _parse_args(args):
-    def include_filter(arg):
+    def is_include_arg(arg):
         return arg.startswith("+")
 
-    def exclude_filter(arg):
+    def is_exclude_arg(arg):
         return arg.startswith("-")
 
-    keywords = [arg for arg in args if not include_filter(arg) and not exclude_filter(arg)]
-    ingredients_to_include = [arg[1:] for arg in args if include_filter(arg)]
-    ingredients_to_exclude = [arg[1:] for arg in args if exclude_filter(arg)]
+    keywords = [arg for arg in args if not is_include_arg(arg) and not is_exclude_arg(arg)]
+    ingredients_to_include = [arg[1:] for arg in args if is_include_arg(arg)]
+    ingredients_to_exclude = [arg[1:] for arg in args if is_exclude_arg(arg)]
 
     return keywords, ingredients_to_include, ingredients_to_exclude
 
