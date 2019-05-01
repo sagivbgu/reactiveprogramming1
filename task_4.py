@@ -22,7 +22,8 @@ def search(file_name, *args):
 
 
 def statistics(aggregate_function, data, property=None):
-    pass
+    function_data = (recipe[property] if property else recipe for recipe in data)
+    return aggregate_function(function_data)
 
 
 def _parse_args(*args):
