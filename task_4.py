@@ -1,9 +1,7 @@
 import json
 
-DEFAULT_BOOK = r"recipes/small-db.json"
 
-
-def search(keywords=(), ingredients_to_include=(), ingredients_to_exclude=(), recipes_file_path=DEFAULT_BOOK):
+def search(file_name, keywords=(), ingredients_to_include=(), ingredients_to_exclude=()):
     def keywords_filter(recipe):
         return all(any(keyword in recipe[field] for field in recipe)
                    for keyword in keywords)
@@ -17,7 +15,7 @@ def search(keywords=(), ingredients_to_include=(), ingredients_to_exclude=(), re
     def all_filters(recipe):
         return all(f(recipe) for f in (keywords_filter, include_filter, exclude_filter))
 
-    recipes = _deserialize_recipes_json(recipes_file_path)
+    recipes = _deserialize_recipes_json(file_name)
     return filter(all_filters, recipes)
 
 

@@ -55,10 +55,9 @@ def p_7_fo(inputlist):
 
 
 def p_8_lc(inputlist):
-    return inputlist[::2]  # TODO: Ask Majeed since it's not a list comprehension
-                           # CR: I'd change it to a regular list comprehension
+    return inputlist[::2]
 
 
 def p_8_fo(inputlist):
-    even_indexes = filter(lambda i: i % 2 == 0, range(len(inputlist)))
+    even_indexes = range(0, len(inputlist), 2)
     return list(map(lambda i: inputlist[i], even_indexes))
