@@ -1,7 +1,9 @@
 import json
 
 
-def search(file_name, keywords=(), ingredients_to_include=(), ingredients_to_exclude=()):
+def search(file_name, *args):
+    keywords, ingredients_to_include, ingredients_to_exclude = _parse_args(args)
+
     def keywords_filter(recipe):
         return all(any(keyword in recipe[field] for field in recipe)
                    for keyword in keywords)
@@ -22,6 +24,13 @@ def search(file_name, keywords=(), ingredients_to_include=(), ingredients_to_exc
 def statistics(function, properties, data):
     properties_values = (int(recipe[properties]) for recipe in data if properties in recipe)
     return function(properties_values)
+
+
+def _parse_args(*args):
+    ingredients_to_include = {arg for arg in args if arg.startswith("+")}
+    ingredients_to_exclude = {arg for arg in args if arg.startswith("-")}
+    keywords = set(args) - ingredients_to_include - ingredients_to_exclude
+    return keywords, ingredients_to_include, ingredients_to_exclude
 
 
 def _deserialize_recipes_json(file_path):
