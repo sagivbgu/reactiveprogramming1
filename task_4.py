@@ -6,9 +6,11 @@ def search(file_name, *args):
 
     def keywords_filter(recipe):
         def is_keyword_in_field(keyword, field):
+            if isinstance(field, dict):
+                field = list(field.values())
             if isinstance(field, (list, dict)) and field:
                 return any(is_keyword_in_field(keyword, subfield) for subfield in field)
-            return keyword in field
+            return keyword in str(field)
 
         return all(any(is_keyword_in_field(keyword, recipe[field]) for field in recipe)
                    for keyword in keywords)

@@ -23,6 +23,12 @@ def test_search_no_results():
 
 
 def test_search_sanity():
+    output = search(TEST_DB_PATH, "W")
+    output = list(output)
+    assert len(output) == 2
+    assert output[0]["name"] == "First name"
+    assert output[1]["name"] == "Third name"
+
     output = search(TEST_DB_PATH, "ver", "yummy", "+two", "+2")
     output = list(output)
     assert len(output) == 2
@@ -54,6 +60,7 @@ def test_search_sanity():
     output = list(output)
     assert len(output) == 1
     assert output[0]["name"] == "Third name"
+
 
 def test_search_large_data():
     output = search(LARGE_DATA_DB_PATH, "")
