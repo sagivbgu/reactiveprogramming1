@@ -8,7 +8,7 @@ def search(file_name, *args):
         def is_keyword_in_field(keyword, field):
             if isinstance(field, dict):
                 field = list(field.values())
-            if isinstance(field, (list, dict)) and field:
+            if isinstance(field, list) and field:
                 return any(is_keyword_in_field(keyword, subfield) for subfield in field)
             return keyword in str(field)
 
