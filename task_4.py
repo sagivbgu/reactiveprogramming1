@@ -21,9 +21,8 @@ def search(file_name, *args):
     return filter(all_filters, recipes)
 
 
-def statistics(function, properties, data):
-    properties_values = (int(recipe[properties]) for recipe in data if properties in recipe)
-    return function(properties_values)
+def statistics(aggregate_function, data, property=None):
+    pass
 
 
 def _parse_args(*args):
