@@ -1,3 +1,3 @@
-{  "name": "First name",  "ingredients": "1 one eno\n2 two", "recipeYield": "8",  "datePublished": "2013-04-01",  "prepTime": "PT15M",  "description": "11 aa 44 bb 66 very yummy"}
-{  "name": "Second name",  "ingredients": "3 three\n2 two", "recipeYield": "8",  "datePublished": "2011-06-06",  "prepTime": "PT6M",  "description": "la la la"}
-{  "name": "Third name",  "ingredients": "2 two\n5 five", "recipeYield": "12",  "datePublished": "2011-09-15",  "prepTime": "PT5M",  "description": "yummy", "extra": "very"}
+{  "name": "First name",  "ingredients": "1 one eno\n2 two", "recipeYield": "8",  "datePublished": "2013-04-01",  "prepTime": "PT15M",  "description": "11 aa 44 bb 66 very yummy", "nested":  {"k1":  "v1", "k2":  {"f2": "v2"}}, "list":  ["Q", "W"]}
+{  "name": "Second name",  "ingredients": "3 three\n2 two", "recipeYield": "8",  "datePublished": "2011-06-06",  "prepTime": "PT6M",  "description": "la la la", "nested":  {"k1":  "v1", "k2":  {"f2": "v2"}}, "list":  ["Q", "W"]}
+{  "name": "Third name",  "ingredients": "2 two\n5 five", "recipeYield": "12",  "datePublished": "2011-09-15",  "prepTime": "PT5M",  "description": "yummy", "nested":  {"k1":  "v1", "k2":  {"f2": "v2"}}, "list":  ["Q", "W"], "extra": "very"}

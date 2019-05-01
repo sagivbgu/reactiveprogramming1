@@ -19,6 +19,7 @@ def test_search_no_results():
     assert not any(search(TEST_DB_PATH, "aa", "pp"))
     assert not any(search(TEST_DB_PATH, "aa", "-one", "-two"))
     assert not any(search(TEST_DB_PATH, "aa", "First", "+nine"))
+    assert not any(search(TEST_DB_PATH, "f2"))
 
 
 def test_search_sanity():
@@ -43,6 +44,16 @@ def test_search_sanity():
     assert len(output) == 1
     assert output[0]["name"] == "Third name"
 
+    output = search(TEST_DB_PATH, "v1", "W")
+    output = list(output)
+    assert len(output) == 2
+    assert output[0]["name"] == "First name"
+    assert output[1]["name"] == "Third name"
+
+    output = search(TEST_DB_PATH, "v2", "W", "-1", "+2")
+    output = list(output)
+    assert len(output) == 1
+    assert output[0]["name"] == "Third name"
 
 def test_search_large_data():
     output = search(LARGE_DATA_DB_PATH, "")
