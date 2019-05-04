@@ -100,6 +100,23 @@ def test_statistics_max():
     assert statistics(aggregate_function=maximum, data=_get_test_recipe_book(), property="recipeYield") == 12
 
 
+def test_statistics_max_property_in_one():
+    def maximum(data):
+        data = [int(d) for d in data]
+        return max(data)
+
+    assert statistics(aggregate_function=maximum, data=_get_test_recipe_book(), property="extraNumber") == 6
+
+
+def test_statistics_max_no_property():
+    def maximum(data):
+        data = [int(d) for d in data]
+        return max(data)
+
+    with pytest.raises(Exception):
+        statistics(aggregate_function=maximum, data=_get_test_recipe_book(), property="DoesntExist")
+
+
 def test_statistics_count():
     assert statistics(lambda d: len(list(d)), data=_get_test_recipe_book()) == 3
 

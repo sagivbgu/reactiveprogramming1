@@ -31,8 +31,8 @@ def search(file_name, *args):
 
 
 def statistics(aggregate_function, data, property=None):
-    function_data = (recipe[property] if property else recipe for recipe in data)
-    return aggregate_function(function_data)
+    statistics_input = data if not property else (recipe[property] for recipe in data if property in recipe)
+    return aggregate_function(statistics_input)
 
 
 def _parse_args(args):
